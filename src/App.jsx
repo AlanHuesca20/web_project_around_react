@@ -1,122 +1,200 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from "react";
+import logo from "../images/logo.svg";
+import avatar from "../images/avatar.jpg";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      <div className="page__content">
+        <header className="header page__section">
+          <img
+            alt="Logotipo Around The U.S."
+            className="logo header__logo"
+            src={logo}
+          />
+        </header>
+        <main className="content">
+          <section className="profile page__section">
+            <div className="profile__image-container">
+              <img className="profile__image" src={avatar} alt="Avatar" />
+              <button
+                class="profile__avatar-edit"
+                type="button"
+                aria-label="Editar avatar"
+              ></button>
+            </div>
 
-      <div className="ticks"></div>
+            <div class="profile__info">
+              <h1 class="profile__title">Jacques Cousteau</h1>
+              <button
+                aria-label="Editar perfil"
+                class="profile__edit-button"
+                type="button"
+              ></button>
+              <p class="profile__description">Explorador</p>
+            </div>
+            <button
+              aria-label="Agregar tarjeta"
+              class="profile__add-button"
+              type="button"
+            ></button>
+          </section>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+          <section class="cards page__section">
+            <ul class="cards__list">
+              <template id="card-template">
+                <li class="card">
+                  <img class="card__image" src="" alt="" />
+                  <button class="card__delete-button" type="button"></button>
+                  <div class="card__description">
+                    <h2 class="card__title">Valle de Yosemite</h2>
+                    <button
+                      aria-label="Botón Me gusta"
+                      class="card__like-button"
+                      type="button"
+                    ></button>
+                  </div>
+                </li>
+              </template>
+            </ul>
+          </section>
+        </main>
+        <footer class="footer page__section">
+          <p class="footer__copyright">© 2025 Around The U.S.</p>
+        </footer>
+        <div class="popup" id="edit-popup">
+          <div class="popup__content">
+            <button
+              aria-label="Cerrar ventana emergente"
+              class="popup__close"
+              type="button"
+            ></button>
+            <h3 class="popup__title">Editar perfil</h3>
+            <form class="popup__form" id="edit-profile-form">
+              <input
+                class="popup__input popup__input_type_name"
+                name="name"
+                placeholder="Nombre"
+                type="text"
+                required
+                minlength="2"
+                maxlength="40"
+                id="edit-name"
+              />
+              <span id="edit-name-error" class="popup__error name-error"></span>
+              <input
+                class="popup__input popup__input_type_description"
+                name="description"
+                placeholder="Acerca de mí"
+                type="text"
+                required
+                minlength="2"
+                maxlength="200"
+                id="edit-description"
+              />
+              <span
+                id="edit-description-error"
+                class="popup__error description-error"
+              ></span>
+              <button class="button popup__button" type="submit" disabled>
+                Guardar
+              </button>
+            </form>
+          </div>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
+        <div class="popup" id="new-card-popup">
+          <div class="popup__content">
+            <button
+              aria-label="Cerrar ventana emergente"
+              class="popup__close"
+              type="button"
+            ></button>
+            <h3 class="popup__title">Nuevo lugar</h3>
+            <form class="popup__form" id="new-card-form">
+              <input
+                class="popup__input popup__input_type_card-name"
+                name="place-name"
+                placeholder="Título"
+                required
+                type="text"
+                minlength="2"
+                maxlength="30"
+                id="card-name"
+              />
+              <span
+                id="card-name-error"
+                class="popup__error place-name-error"
+              ></span>
+              <input
+                class="popup__input popup__input_type_url"
+                name="link"
+                placeholder="Enlace a la imagen"
+                required
+                type="url"
+                id="card-link"
+              />
+              <span id="card-link-error" class="popup__error link-error"></span>
+              <button class="button popup__button" type="submit" disabled>
+                Crear
+              </button>
+            </form>
+          </div>
         </div>
-      </section>
+        <div class="popup" id="image-popup">
+          <div class="popup__content popup__content_content_image">
+            <button
+              aria-label="Cerrar ventana emergente"
+              class="popup__close"
+              type="button"
+            ></button>
+            <img alt="" class="popup__image" src="#" />
+            <p class="popup__caption"></p>
+          </div>
+        </div>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+        <div class="popup" id="delete-card-popup">
+          <div class="popup__content">
+            <button
+              aria-label="Cerrar ventana emergente"
+              class="popup__close"
+              type="button"
+            ></button>
+            <h3 class="popup__title">¿Estás seguro/a?</h3>
+            <form class="popup__form">
+              <button class="button popup__button" type="submit">
+                Sí
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="popup" id="edit-avatar-popup">
+          <div class="popup__content">
+            <button
+              aria-label="Cerrar ventana emergente"
+              class="popup__close"
+              type="button"
+            ></button>
+            <h3 class="popup__title">Cambiar foto de perfil</h3>
+            <form class="popup__form" id="edit-avatar-form" novalidate>
+              <input
+                class="popup__input popup__input_type_url"
+                name="avatar"
+                placeholder="Enlace a la imagen"
+                required
+                type="url"
+              />
+              <span class="popup__error avatar-error"></span>
+              <button class="button popup__button" type="submit">
+                Guardar
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
