@@ -1,11 +1,13 @@
-import BtnDelete from "../../../../images/delete-icon.svg";
-import BtnLike from "../../../../images/like-active.svg";
-
 export default function Card(props) {
   const { name, link, isLiked } = props.card;
   return (
     <li className="card">
-      <img className="card__image" src={link} alt="" />
+      <img
+        className="card__image"
+        src={link}
+        alt=""
+        onClick={() => handleOpenPopup(imageComponent)}
+      />
       <button
         aria-label="Delete card"
         className="card__delete-button"
