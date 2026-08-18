@@ -1,3 +1,6 @@
+import BtnDelete from "../../../../images/delete-icon.svg";
+import BtnLike from "../../../../images/like-active.svg";
+
 export default function Card(props) {
   const { name, link, isLiked } = props.card;
   return (

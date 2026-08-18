@@ -2,9 +2,13 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Card from "./components/Card/Card";
 import ImagePopup from "./components/Popup/ImagePopup";
-import EditBtn from "src/images/edit-icon.svg";
-import Addbtn from "src/images/add-icon.svg";
+import EditBtn from "../../images/edit-icon.svg";
+import Addbtn from "../../images/add-icon.svg";
+import avatar from "../../images/avatar.jpg";
 import NewCard from "../form/NewCard/NewCard";
+import EditAvatar from "../form/EditAvatar/EditAvatar";
+import EditProfile from "../form/EditProfile/EditProfile";
+import Card from "./components/Card/Card";
 
 const cards = [
   {
@@ -56,22 +60,22 @@ export default function Main() {
         <div className="profile__image-container">
           <img className="profile__image" src={avatar} alt="Avatar" />
           <button
-            class="profile__avatar-edit"
+            clasName="profile__avatar-edit"
             type="button"
             aria-label="Editar avatar"
             onClick={() => handleOpenPopup(EditAvatarPopup)}
           ></button>
         </div>
 
-        <div class="profile__info">
-          <h1 class="profile__title">Jacques Cousteau</h1>
+        <div className="profile__info">
+          <h1 className="profile__title">Jacques Cousteau</h1>
           <button
             aria-label="Editar perfil"
-            class="profile__edit-button"
+            className="profile__edit-button"
             type="button"
             onClick={() => handleOpenPopup(EditProfilePopup)}
           ></button>
-          <p class="profile__description">Explorador</p>
+          <p className="profile__description">Explorador</p>
         </div>
         <button
           aria-label="Agregar tarjeta"
@@ -81,20 +85,20 @@ export default function Main() {
         ></button>
       </section>
 
-      <section class="cards page__section">
+      <section className="cards page__section">
         <ul className="cards__list">
           {cards.map((card) => (
             <Card key={card._id} card={card} />
           ))}
           <template id="card-template">
-            <li class="card">
-              <img class="card__image" src="" alt="" />
-              <button class="card__delete-button" type="button"></button>
-              <div class="card__description">
-                <h2 class="card__title">Valle de Yosemite</h2>
+            <li className="card">
+              <img className="card__image" src="" alt="" />
+              <button className="card__delete-button" type="button"></button>
+              <div className="card__description">
+                <h2 className="card__title">Valle de Yosemite</h2>
                 <button
                   aria-label="Botón Me gusta"
-                  class="card__like-button"
+                  className="card__like-button"
                   type="button"
                 ></button>
               </div>

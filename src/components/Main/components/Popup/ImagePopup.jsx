@@ -1,5 +1,5 @@
 import React from "react";
-import closeIcon from "../images/close-icon.png";
+import closeIcon from "../../../../images/close.svg";
 
 function ImagePopup({ selectedCard, onClose }) {
   return (
