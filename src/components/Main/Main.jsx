@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Card from "./components/Card/Card";
 import ImagePopup from "./components/Popup/ImagePopup";
+import Popup from "./components/Popup/Popup";
 import EditBtn from "../../images/edit-icon.svg";
 import Addbtn from "../../images/add-icon.svg";
 import avatar from "../../images/avatar.jpg";
@@ -106,9 +107,9 @@ export default function Main() {
         </ul>
       </section>
       {popup && (
-        <popup onClose={handleClosePopup} title={popup.title}>
+        <Popup onClose={handleClosePopup} title={popup.title}>
           {popup.children}
-        </popup>
+        </Popup>
       )}
     </main>
   );

@@ -8,9 +8,9 @@ function App() {
 
   return (
     <div className="page__content">
-      <header className="header page__section" />
-      <main className="content" />
-      <footer className="footer page__section" />
+      <Header className="header page__section" />
+      <Main className="content" />
+      <Footer className="footer page__section" />
     </div>
   );
 }

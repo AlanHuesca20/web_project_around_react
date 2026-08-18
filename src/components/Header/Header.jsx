@@ -6,7 +6,7 @@ export default function Header() {
       <img
         alt="Logotipo Around The U.S."
         className="logo header__logo"
-        src={Headerlogo}
+        src={HeaderLogo}
       />
     </header>
   );
