@@ -1,14 +1,11 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Card from "./components/Card/Card";
-import ImagePopup from "./components/Popup/ImagePopup";
 import Popup from "./components/Popup/Popup";
-import EditBtn from "../../images/edit-icon.svg";
-import Addbtn from "../../images/add-icon.svg";
 import avatar from "../../images/avatar.jpg";
 import NewCard from "../form/NewCard/NewCard";
 import EditAvatar from "../form/EditAvatar/EditAvatar";
 import EditProfile from "../form/EditProfile/EditProfile";
+import ImagePopup from "../Main/components/Popup/ImagePopup";
 
 const cards = [
   {
@@ -45,6 +42,10 @@ export default function Main() {
     title: "Cambiar foto de perfil",
     children: <EditAvatar />,
   };
+  const imagePopup = {
+    title: null,
+    children: <ImagePopup />,
+  };
 
   function handleOpenPopup(popup) {
     setPopup(popup);
@@ -60,7 +61,7 @@ export default function Main() {
         <div className="profile__image-container">
           <img className="profile__image" src={avatar} alt="Avatar" />
           <button
-            clasName="profile__avatar-edit"
+            className="profile__avatar-edit"
             type="button"
             aria-label="Editar avatar"
             onClick={() => handleOpenPopup(EditAvatarPopup)}
@@ -90,20 +91,18 @@ export default function Main() {
           {cards.map((card) => (
             <Card key={card._id} card={card} />
           ))}
-          <template id="card-template">
-            <li className="card">
-              <img className="card__image" src="" alt="" />
-              <button className="card__delete-button" type="button"></button>
-              <div className="card__description">
-                <h2 className="card__title">Valle de Yosemite</h2>
-                <button
-                  aria-label="Botón Me gusta"
-                  className="card__like-button"
-                  type="button"
-                ></button>
-              </div>
-            </li>
-          </template>
+          <li className="card">
+            <img className="card__image" src="" alt="" />
+            <button className="card__delete-button" type="button"></button>
+            <div className="card__description">
+              <h2 className="card__title">Valle de Yosemite</h2>
+              <button
+                aria-label="Botón Me gusta"
+                className="card__like-button"
+                type="button"
+              ></button>
+            </div>
+          </li>
         </ul>
       </section>
       {popup && (

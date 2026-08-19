@@ -1,9 +1,10 @@
 import React from "react";
 import closeIcon from "../../../../images/close.svg";
+import Card from "../Card/Card";
 
-function ImagePopup({ selectedCard, onClose }) {
+function ImagePopup({ Card, onClose }) {
   return (
-    <section className={`modal ${selectedCard ? "" : "open"}`}>
+    <section className={`modal ${Card ? "" : "open"}`}>
       <div onClick={onClose} className="modal__overlay"></div>
       <div className="modal__container">
         <img

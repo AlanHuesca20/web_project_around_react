@@ -5,7 +5,7 @@ export default function Card(props) {
       <img
         className="card__image"
         src={link}
-        alt=""
+        alt={name}
         onClick={() => handleOpenPopup(imageComponent)}
       />
       <button
