@@ -5,7 +5,7 @@ import avatar from "../../images/avatar.jpg";
 import NewCard from "../form/NewCard/NewCard";
 import EditAvatar from "../form/EditAvatar/EditAvatar";
 import EditProfile from "../form/EditProfile/EditProfile";
-import ImagePopup from "../Main/components/Popup/ImagePopup";
+import ImagePopup from "./components/Popup/ImagePopup";
 
 const cards = [
   {
@@ -55,6 +55,13 @@ export default function Main() {
     setPopup(null);
   }
 
+  function handleImageClick(card) {
+    handleOpenPopup({
+      title: null,
+      children: <ImagePopup card={card} />,
+    });
+  }
+
   return (
     <main className="content">
       <section className="profile page__section">
@@ -89,10 +96,10 @@ export default function Main() {
       <section className="cards page__section">
         <ul className="cards__list">
           {cards.map((card) => (
-            <Card key={card._id} card={card} />
+            <Card key={card._id} card={card} onClick={handleImageClick} />
           ))}
           <li className="card">
-            <img className="card__image" src="" alt="" />
+            <img className="card__image" src={imagePopup} alt="" />
             <button className="card__delete-button" type="button"></button>
             <div className="card__description">
               <h2 className="card__title">Valle de Yosemite</h2>

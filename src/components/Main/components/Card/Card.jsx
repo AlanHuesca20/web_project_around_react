@@ -1,12 +1,18 @@
 export default function Card(props) {
   const { name, link, isLiked } = props.card;
+  const { onClick } = props;
+  const imageComponent = {
+    name,
+    link,
+  };
+
   return (
     <li className="card">
       <img
         className="card__image"
         src={link}
         alt={name}
-        onClick={() => handleOpenPopup(imageComponent)}
+        onClick={() => onClick(imageComponent)}
       />
       <button
         aria-label="Delete card"

@@ -1,29 +1,27 @@
 import React from "react";
-import closeIcon from "../../../../images/close.svg";
-import Card from "../Card/Card";
 
-function ImagePopup({ Card, onClose }) {
+function ImagePopup(props) {
+  const { card } = props;
   return (
-    <section className={`modal ${Card ? "" : "open"}`}>
-      <div onClick={onClose} className="modal__overlay"></div>
-      <div className="modal__container">
+    <section className={`modal ${card ? "" : "open"}`}>
+      <div className="popup__overlay"></div>
+      <div className="popup__container">
         <img
-          className="modal__container-close"
-          src={closeIcon}
+          className="popup__container-close"
+          src=""
           alt="icon para cerra la
             imágen"
-          onClick={onClose}
         />
 
-        {selectedCard && (
+        {card && (
           <>
             <img
-              className="modal__image-card"
-              src={selectedCard.link}
-              alt={selectedCard.name}
+              className="popup__image-card"
+              src={card.link}
+              alt={card.name}
               id="modal"
             />
-            <h3 className="modal__title-text"> {selectedCard.name} </h3>
+            <h3 className="popup__title-text"> {card.name} </h3>
           </>
         )}
       </div>
