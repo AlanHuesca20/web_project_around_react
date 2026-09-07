@@ -5,7 +5,10 @@ export default function Card(props) {
     name,
     link,
   };
-
+  const cardLikeButtonClassName = `card__like-button ${
+    isLiked ? "card__like-button_is-active" : ""
+  }`;
+  const { currentUser } = useContext(CurrentUserContext);
   return (
     <li className="card">
       <img
