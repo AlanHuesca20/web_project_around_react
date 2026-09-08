@@ -78,14 +78,10 @@ export class Api {
 }
 
 const api = new Api({
-  user: {
-    name: "Jacques Cousteau",
-    about: "Explorador",
-    avatar:
-      "https://practicum-content.s3.us-west-1.amazonaws.com/frontend-developer/common/avatar.jpg",
-    _id: "46cee3f71194a731b081fb56",
+  baseUrl: "https://around-api.es.tripleten-services.com/v1",
+  headers: {
+    authorization: "78559de7-ba4b-46ac-8eb5-25d0e05ab945",
   },
-  token: "78559de7-ba4b-46ac-8eb5-25d0e05ab945",
 });
 
 export default api;
