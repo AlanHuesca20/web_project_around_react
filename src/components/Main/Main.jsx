@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
 import Card from "./components/Card/Card";
 import Popup from "./components/Popup/Popup";
 import avatar from "../../images/avatar.jpg";
@@ -6,13 +6,18 @@ import NewCard from "../form/NewCard/NewCard";
 import EditAvatar from "../form/EditAvatar/EditAvatar";
 import EditProfile from "../form/EditProfile/EditProfile";
 import ImagePopup from "./components/Popup/ImagePopup";
-import api from "../../utils/api";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-export default function Main() {
-  const [popup, setPopup] = useState(null);
-  const [cards, setCards] = useState([]);
-  const { currentUser } = useContext(CurrentUserContext);
+export default function Main(props) {
+  const {
+    popup,
+    onOpenPopup,
+    onClosePopup,
+    cards,
+    onCardLike,
+    onCardDelete,
+    onClick,
+  } = props;
 
   const newCardPopup = {
     title: "Nuevo Lugar",
@@ -31,6 +36,8 @@ export default function Main() {
     children: <ImagePopup />,
   };
 
+  const { currentUser } = useContext(CurrentUserContext);
+
   function handleOpenPopup(popup) {
     setPopup(popup);
   }
@@ -44,6 +51,10 @@ export default function Main() {
       title: null,
       children: <ImagePopup card={card} />,
     });
+  }
+
+  function handleCardClick(card) {
+    handleOpenPopup({ children: <ImagePopup card={card} /> });
   }
 
   return (
@@ -84,7 +95,13 @@ export default function Main() {
       <section className="cards page__section">
         <ul className="cards__list">
           {cards.map((card) => (
-            <Card key={card._id} card={card} onClick={handleImageClick} />
+            <Card
+              key={card._id}
+              card={card}
+              onClick={handleImageClick}
+              handleCardClick={handleCardClick}
+              onCardLike={onCardLike}
+            />
           ))}
         </ul>
       </section>

@@ -6,31 +6,72 @@ import api from "./utils/api";
 import { CurrentUserContext } from "./contexts/CurrentUserContext";
 
 function App() {
-  //**Manejo de estado de la data del usuario */
+  const [popup, setPopup] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
+  const [cards, setCards] = useState([]);
+
+  function handleOpenPopup(popup) {
+    setPopup(popup);
+  }
+
+  function handleClosePopup() {
+    setPopup(null);
+  }
 
   useEffect(() => {
-    (async () => {
-      await api.getUserInfo().then((data) => {
+    const getUserData = async () => {
+      try {
+        const data = await api.getUserInfo();
         setCurrentUser(data);
-      });
-    })();
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    const getInitialCardsData = async () => {
+      try {
+        const cards = await api.getInitialCards();
+        setCards(cards);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getUserData();
+    getInitialCardsData();
   }, []);
 
-      api
-      .getCardList()
-      .then((data) => {
-        setCards(data);
+  async function handleCardLike(card) {
+    const isLiked = card.isLiked;
+
+    await api
+      .changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((currentCard) =>
+            currentCard._id === card._id ? newCard : currentCard,
+          ),
+        );
       })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+      .catch((error) => console.error(error));
+  }
 
-  const handleUpdateUser = (data) => {
+  async function handleCardDelete(cardId) {
+    try {
+      setIsLoading(true);
+      const isId = cardId;
+      await api.removeCard(isId);
+
+      setCards((state) => state.filter((card) => card._id !== isId));
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const handleUpdateUser = (name, about) => {
     (async () => {
       await api
-        .setUserInfo(data)
+        .setUserInfo(name, about)
         .then((newData) => {
           setCurrentUser(newData);
           handleClosePopup();
@@ -57,36 +98,21 @@ function App() {
       });
   };
 
-   function handleCardLike(card) {
-    const isLike = card.likes.some((i) => i._id === currentUser._id);
-
-    let apiRequest = isLike
-      ? api.deleteLikeFromCard(card._id, isLike)
-      : api.addLikeFromCard(card._id, !isLike);
-
-    apiRequest.then((newCard) => {
-      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
-    });
-  }
-
-  async function handleCardDelete() {
-    const isCard = cardToDelete._id;
-    api.deleteCardFromServer(isCard).then(() => {
-      setCards((prevCards) => prevCards.filter((c) => c._id !== isCard));
-    });
-  }
-
   return (
-    <CurrentUserContext.Provider value={{ currentUser, handleUpdateUser }}>
+    <CurrentUserContext.Provider
+      value={{ currentUser, handleUpdateUser, handleUpdateAvatar }}
+    >
       <div className="page__content">
-        <Header className="header page__section" />
+        <Header />
         <Main
-          className="content"
           onOpenPopup={handleOpenPopup}
           onClosePopup={handleClosePopup}
           popup={popup}
+          cards={cards}
+          onCardLike={handleCardLike}
+          onCardDelete={handleCardDelete}
         />
-        <Footer className="footer page__section" />
+        <Footer />
       </div>
     </CurrentUserContext.Provider>
   );
