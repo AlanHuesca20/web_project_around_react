@@ -38,23 +38,15 @@ export default function Main(props) {
 
   const { currentUser } = useContext(CurrentUserContext);
 
-  function handleOpenPopup(popup) {
-    setPopup(popup);
-  }
-
-  function handleClosePopup() {
-    setPopup(null);
-  }
-
   function handleImageClick(card) {
-    handleOpenPopup({
+    onOpenPopup({
       title: null,
       children: <ImagePopup card={card} />,
     });
   }
 
   function handleCardClick(card) {
-    handleOpenPopup({ children: <ImagePopup card={card} /> });
+    onOpenPopup({ children: <ImagePopup card={card} /> });
   }
 
   return (
@@ -70,7 +62,7 @@ export default function Main(props) {
             className="profile__avatar-edit"
             type="button"
             aria-label="Editar avatar"
-            onClick={() => handleOpenPopup(EditAvatarPopup)}
+            onClick={() => onOpenPopup(EditAvatarPopup)}
           ></button>
         </div>
 
@@ -80,7 +72,7 @@ export default function Main(props) {
             aria-label="Editar perfil"
             className="profile__edit-button"
             type="button"
-            onClick={() => handleOpenPopup(EditProfilePopup)}
+            onClick={() => onOpenPopup(EditProfilePopup)}
           ></button>
           <p className="profile__description">{currentUser.about}</p>
         </div>
@@ -88,7 +80,7 @@ export default function Main(props) {
           aria-label="Agregar tarjeta"
           className="profile__add-button"
           type="button"
-          onClick={() => handleOpenPopup(newCardPopup)}
+          onClick={() => onOpenPopup(newCardPopup)}
         ></button>
       </section>
 
@@ -106,7 +98,7 @@ export default function Main(props) {
         </ul>
       </section>
       {popup && (
-        <Popup onClose={handleClosePopup} title={popup.title}>
+        <Popup onClose={onClosePopup} title={popup.title}>
           {popup.children}
         </Popup>
       )}
