@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import Card from "./components/Card/Card";
 import Popup from "./components/Popup/Popup";
-import avatar from "../../images/avatar.jpg";
 import NewCard from "../form/NewCard/NewCard";
 import EditAvatar from "../form/EditAvatar/EditAvatar";
 import EditProfile from "../form/EditProfile/EditProfile";
