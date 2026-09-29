@@ -17,6 +17,10 @@ export class Api {
     }).then(this._checkResponse);
   }
 
+  setUserInfo(name, about) {
+    return this._makeRequest("/users/me", "PATCH", { name, about });
+  }
+
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,

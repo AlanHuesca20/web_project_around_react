@@ -58,7 +58,6 @@ function App() {
 
   async function handleCardDelete(cardId) {
     try {
-      setIsLoading(true);
       const isId = cardId;
       await api.removeCard(isId);
 
@@ -68,10 +67,10 @@ function App() {
     }
   }
 
-  const handleUpdateUser = (name, about) => {
+  const handleUpdateUser = (data) => {
     (async () => {
       await api
-        .setUserInfo(name, about)
+        .setUserInfo(data)
         .then((newData) => {
           setCurrentUser(newData);
           handleClosePopup();
@@ -82,7 +81,7 @@ function App() {
 
   const handleUpdateAvatar = async (data) => {
     api
-      .setUserAvatar(data)
+      .updateAvatar(data)
       .then((avatarUrl) => {
         const updateAvatar = {
           ...currentUser,

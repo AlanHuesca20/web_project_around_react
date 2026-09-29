@@ -1,27 +1,35 @@
-import { CurrentUserContext } from "../../../../contexts/CurrentUserContext";
-import { useContext } from "react";
+import { useState } from "react";
 
 export default function Card(props) {
-  const { name, link, isLiked } = props.card;
-  const { onClick } = props;
-  const imageComponent = {
-    name,
-    link,
-  };
-
-  const { currentUser } = useContext(CurrentUserContext);
-
+  const { name, link, _id } = props.card;
+  const [isLiked, setIsLiked] = useState(props.card.isLiked);
+  const { handleCardClick, onCardLike, onCardDelete } = props;
   const cardLikeButtonClassName = `card__like-button ${
     isLiked ? "card__like-button_is-active" : ""
   }`;
-
-  const handleClick = () => {
-    onCardClick({ name, link });
+  const imageComponent = {
+    name,
+    link,
+    _id,
+    isLiked,
   };
 
-  const handleLikeClick = () => {
-    onCardLike(card);
-  };
+  async function handleLikeClick(card) {
+    try {
+      await onCardLike(card);
+      setIsLiked(!isLiked);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function handleDeleteClick(card) {
+    try {
+      await onCardDelete(card);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <li className="card">
@@ -29,12 +37,13 @@ export default function Card(props) {
         className="card__image"
         src={link}
         alt={name}
-        onClick={() => onClick(imageComponent)}
+        onClick={() => handleCardClick(imageComponent)}
       />
       <button
         aria-label="Delete card"
         className="card__delete-button"
         type="button"
+        onClick={() => handleDeleteClick(imageComponent)}
       />
       <div className="card__description">
         <h2 className="card__title">{name}</h2>
@@ -42,6 +51,7 @@ export default function Card(props) {
           aria-label="Like card"
           type="button"
           className={cardLikeButtonClassName}
+          onClick={() => handleLikeClick(imageComponent)}
         />
       </div>
     </li>
