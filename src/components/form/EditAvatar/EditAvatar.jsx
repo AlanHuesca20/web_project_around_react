@@ -7,12 +7,12 @@ export default function EditAvatar() {
   const refAvatar = useRef(); // Crea una referencia
   const [avatar, setAvatar] = useState(""); // Crea el estado para el avatar
 
-  const handleAvatarChange = (e) => {
-    setAvatar(e.target.value); // Actualiza avatar cuando cambie la entrada
+  const handleAvatarChange = (event) => {
+    setAvatar(event.target.value); // Actualiza avatar cuando cambie la entrada
   };
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit(event) {
+    event.preventDefault();
 
     handleUpdateAvatar({
       avatar: refAvatar.current.value, // El valor de la entrada que obtuvimos utilizando la ref  ,
