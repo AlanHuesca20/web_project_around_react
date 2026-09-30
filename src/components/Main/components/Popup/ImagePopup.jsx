@@ -1,30 +1,14 @@
 function ImagePopup(props) {
-  const { card } = props;
+  const { name, link } = props.card;
   return (
-    <section className={`modal ${card ? "" : "open"}`}>
-      <div className="popup__overlay"></div>
-      <div className="popup__container">
-        <img
-          className="popup__container-close"
-          src=""
-          alt="icon para cerra la
-            imágen"
-        />
-
-        {card && (
-          <>
-            <img
-              className="popup__image-card"
-              src={card.link}
-              alt={card.name}
-              id="modal"
-            />
-            <h3 className="popup__title-text"> {card.name} </h3>
-          </>
-        )}
+    <div className="popup__images">
+      <div className="popup__content-image">
+        <img className="popup__image" src={link} alt={name} />
       </div>
-    </section>
+      <div className="popup__paragraph-content">
+        <p className="popup__paragraph">{name}</p>
+      </div>
+    </div>
   );
 }
-
 export default ImagePopup;

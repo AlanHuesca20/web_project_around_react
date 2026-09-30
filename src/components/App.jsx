@@ -9,6 +9,7 @@ function App() {
   const [popup, setPopup] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleOpenPopup(popup) {
     setPopup(popup);
@@ -70,7 +71,7 @@ function App() {
   const handleUpdateUser = (data) => {
     (async () => {
       await api
-        .setUserInfo(data)
+        .updateUserInfo(data)
         .then((newData) => {
           setCurrentUser(newData);
           handleClosePopup();
@@ -90,16 +91,34 @@ function App() {
           about: avatarUrl.about,
         };
         setCurrentUser(updateAvatar);
-        setIsEditAvatarPopupOpen(true);
+        handleClosePopup();
       })
       .catch((err) => {
         console.log("No se ha actualizado el perfil:", err);
       });
   };
 
+  const handleAddPlaceSubmit = (data) => {
+    (async () => {
+      setIsLoading(true);
+      await api.addCard(data).then((newCard) => {
+        setCards([newCard, ...cards]);
+        setTimeout(() => {
+          handleClosePopup();
+          setIsLoading(false);
+        }, 2000);
+      });
+    })();
+  };
+
   return (
     <CurrentUserContext.Provider
-      value={{ currentUser, handleUpdateUser, handleUpdateAvatar }}
+      value={{
+        currentUser,
+        handleUpdateUser,
+        handleUpdateAvatar,
+        handleAddPlaceSubmit,
+      }}
     >
       <div className="page__content">
         <Header />
