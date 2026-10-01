@@ -82,7 +82,7 @@ function App() {
 
   const handleUpdateAvatar = async (data) => {
     api
-      .updateAvatar(data)
+      .updateAvatar(data.avatar)
       .then((avatarUrl) => {
         const updateAvatar = {
           ...currentUser,

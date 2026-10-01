@@ -27,7 +27,6 @@ export default function EditProfile() {
       className="popup__form"
       name="profile-form"
       id="edit-profile-form"
-      noValidate
       onSubmit={handleSubmit}
     >
       <label className="popup__label">

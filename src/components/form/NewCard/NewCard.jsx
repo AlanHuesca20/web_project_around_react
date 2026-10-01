@@ -26,7 +26,6 @@ export default function NewCard() {
       className="popup__form"
       name="card-form"
       id="new-card-form"
-      noValidate
       onSubmit={handleSubmit}
     >
       <label className="popup__field">

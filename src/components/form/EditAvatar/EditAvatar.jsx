@@ -20,7 +20,7 @@ export default function EditAvatar() {
   }
 
   return (
-    <form className="popup__form" id="edit-avatar-form" noValidate>
+    <form className="popup__form" id="edit-avatar-form" onSubmit={handleSubmit}>
       <input
         className="popup__input popup__input_type_url"
         name="avatar"

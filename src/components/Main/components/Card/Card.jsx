@@ -43,7 +43,7 @@ export default function Card(props) {
         aria-label="Delete card"
         className="card__delete-button"
         type="button"
-        onClick={() => handleDeleteClick(imageComponent)}
+        onClick={() => handleDeleteClick(_id)}
       />
       <div className="card__description">
         <h2 className="card__title">{name}</h2>
