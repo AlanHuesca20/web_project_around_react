@@ -92,6 +92,7 @@ export default function Main(props) {
               onClick={handleImageClick}
               handleCardClick={handleCardClick}
               onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
             />
           ))}
         </ul>
