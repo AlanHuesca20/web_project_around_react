@@ -46,7 +46,7 @@ function App() {
     const isLiked = card.isLiked;
 
     await api
-      .changeLikeCardStatus(card._id, !isLiked)
+      .addLike(card._id, !isLiked)
       .then((newCard) => {
         setCards((state) =>
           state.map((currentCard) =>
